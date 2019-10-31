@@ -13,10 +13,9 @@ use DigitalAscetic\EntityRemovalBundle\EventListener\EntityRemovalSubscriber;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Reference;
 
-class DigitalAsceticEntityRemovalExtension extends Extension implements PrependExtensionInterface
+class DigitalAsceticEntityRemovalExtension extends Extension
 {
 
     /**
@@ -29,7 +28,7 @@ class DigitalAsceticEntityRemovalExtension extends Extension implements PrependE
 
         $config = $this->processConfiguration(new Configuration(), $configs);
 
-        if ($config['enabled']) {
+        if (isset($config) && isset($config['enabled']) && $config['enabled']) {
             $entityRemovalSubscriber = new Definition(EntityRemovalSubscriber::class);
             $entityRemovalSubscriber->addArgument(new Reference('doctrine.orm.entity_manager'));
             $entityRemovalSubscriber->addArgument(new Reference('logger'));
@@ -38,13 +37,4 @@ class DigitalAsceticEntityRemovalExtension extends Extension implements PrependE
             $container->setDefinition('digital_ascetic.entity_removal.subscriber', $entityRemovalSubscriber);
         }
     }
-
-    /**
-     * @param ContainerBuilder $container
-     */
-    public function prepend(ContainerBuilder $container)
-    {
-
-    }
-
 }
