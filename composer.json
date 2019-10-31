@@ -1,0 +1,48 @@
+{
+  "name": "digitalascetic/entity-removal",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "library",
+  "description": "Digital Ascetic Entity Removal Bundle",
+  "authors": [
+    {
+      "name": "Eduard Deza",
+      "email": "ed@ascetic.io"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "": "src/",
+      "DigitalAscetic\\EntityRemovalBundle\\Test\\": "tests/"
+    },
+    "files": [
+      "tests/Functional/AppKernel.php"
+    ]
+  },
+  "require": {
+    "php": ">=7.1",
+    "symfony/symfony": "^3.2",
+    "doctrine/doctrine-bundle": "^1.6",
+    "doctrine/orm": "^2.5",
+    "symfony/monolog-bundle": "^3.0"
+  },
+  "require-dev": {
+    "ext-sqlite3": "*",
+    "sensio/generator-bundle": "^3.0",
+    "phpunit/phpunit": "5.7.*",
+    "symfony/phpunit-bridge": "^4.3",
+    "liip/functional-test-bundle": "1.7.x",
+    "doctrine/doctrine-fixtures-bundle": "2.3.*"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://repo.fury.io/8wbRFwcPzdATcTofLeQs/digitalascetic/"
+    }
+  ]
+}

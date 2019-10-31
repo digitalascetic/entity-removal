@@ -46,3 +46,11 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+# Gemfury key
+.gemfury
+
+# PHPStorm
+.idea
+
+/tests/*/logs/*

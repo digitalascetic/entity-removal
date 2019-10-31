@@ -1,0 +1,58 @@
+imports:
+    - { resource: parameters.yml }
+
+framework:
+    test: true
+    session:
+        storage_id: session.storage.mock_file
+    profiler:
+        collect: false
+    secret: 'secret'
+    translator: { fallbacks: [en] }
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: '%kernel.logs_dir%/%kernel.environment%.log'
+            level: debug
+            channels: ['!event', '!php']
+        console:
+            type: console
+            process_psr_3_messages: false
+            channels: ['!event', '!doctrine', '!console', '!php']
+        # To follow logs in real time, execute the following command:
+        # `bin/console server:log -vv`
+        #server_log:
+        #    type: server_log
+        #    process_psr_3_messages: false
+        #    host: 127.0.0.1:9911
+        php:
+            type:  stream
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: warning
+            channels: 'php'
+
+doctrine:
+    dbal:
+        default_connection: 'default'
+        connections:
+            default:
+                driver: "pdo_sqlite"
+                memory: true
+    orm:
+        auto_generate_proxy_classes: true
+        entity_managers:
+            default:
+                 mappings:
+                     subscription_test:
+                         type: 'annotation'
+                         dir: '%kernel.root_dir%/../Entity'
+                         prefix: 'DigitalAscetic\EntityRemovalBundle\Test\Entity'
+                         is_bundle: false
+                 dql:
+                     datetime_functions:
+                         year: 'DoctrineExtensions\Query\Sqlite\Year'
+
+digital_ascetic_entity_removal:
+    enabled: true
