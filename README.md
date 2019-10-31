@@ -3,6 +3,29 @@
 
 This bundle try to solve the problem  when removing entities that has one direction association to other entities.
 
+#### Getting started
+
+Add DigitalAsceticEntityRemovalBundle to your AppKernel:
+```
+    public function registerBundles()
+    {
+
+        $bundles = [
+            new DigitalAscetic\EntityRemovalBundle\DigitalAsceticEntityRemovalBundle(),
+        ];
+
+        return $bundles;
+    }
+```
+
+Enable this bundle via config.yml:
+```
+digital_ascetic_entity_removal:
+    enabled: true
+```
+
+Implement over your entities the interface _EntityRemovalDependencyInterface_ and add method: public function getClassDependencies() 
+
 #### Case study
 
 Suppose we have this two classes:

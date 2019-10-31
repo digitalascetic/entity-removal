@@ -49,6 +49,7 @@
 
 # Gemfury key
 .gemfury
+package.zip
 
 # PHPStorm
 .idea
