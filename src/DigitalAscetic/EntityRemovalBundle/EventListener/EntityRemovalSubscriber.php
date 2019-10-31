@@ -37,8 +37,6 @@ class EntityRemovalSubscriber implements EventSubscriber
     {
         $this->em = $entityManager;
         $this->logger = $logger;
-        $this->conn = $entityManager->getConnection();
-        $this->uow = $entityManager->getUnitOfWork();
     }
 
 
@@ -51,6 +49,9 @@ class EntityRemovalSubscriber implements EventSubscriber
 
     public function onFlush(OnFlushEventArgs $args)
     {
+        $this->em = $args->getEntityManager();
+        $this->uow = $this->em->getUnitOfWork();
+
         foreach ($this->uow->getScheduledEntityDeletions() as $entity) {
             // For current remove entity, we avoid duplicate remove calling method, otherwise infinite loop occurs
             $this->doRemovalDependency($entity, false);
